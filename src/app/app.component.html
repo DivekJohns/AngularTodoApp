@@ -1,0 +1,40 @@
+<div class="w3-mobile w3-container w3-top w3-teal w3-card-4 " >
+  <h2 class="w3-center">Todo APP</h2>
+</div>
+<br>
+<br>
+<br>
+<div  class="w3-mobile w3-card w3-margin w3-margin-right  w3-padding w3-bar" style="width: 96%;">
+<form class="w3-bar-item">
+<input  #inputdata class="w3-input w3-round w3-animate-input" type="text" style="width:45%"  placeholder="Write Task..." >
+</form>
+<!-- @todo make it center -->
+ <div class=" w3-dropdown-hover w3-bar-item">
+    <button class="w3-button w3-text-teal " >{{Category}}  <i class="fa fa-angle-down"></i></button>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4">
+      <a href="#" (click)="changeCategory('Personal')" class="w3-bar-item w3-button">Personal</a>
+      <a href="#" (click)="changeCategory('Work')" class="w3-bar-item w3-button">Work</a>
+      <a href="#" (click)="changeCategory('Hobbies')"  class="w3-bar-item w3-button">Hobbies</a>
+      <a href="#" (click)="changeCategory('Vacation')"  class="w3-bar-item w3-button">Vacation</a>
+      <a href="#" (click)="changeCategory('Birthday')" class="w3-bar-item w3-button">Birthday</a>
+      <a href="#" (click)="changeCategory('Hobbies')" class="w3-bar-item w3-button">Hobbies</a>
+    </div>
+    </div>
+
+     <div class="w3-dropdown-hover w3-bar-item">
+    <button class="w3-button w3-text-teal ">{{Prority}} <i class="fa fa-angle-down"></i></button>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4 ">
+      <a href="#" (click)="changePrority('High')" class="w3-bar-item w3-button">High</a>
+      <a href="#" (click)="changePrority('Medium')"  class="w3-bar-item w3-button">Medium</a>
+      <a href="#" (click)="changePrority('Low ')" class="w3-bar-item w3-button">Low</a>
+    </div>
+
+    </div>
+       <div class="w3-bar-item">
+        <button  (click)="saveTodo(inputdata.value)"  class="  w3-round w3-button w3-teal">ADD</button>
+      </div>
+
+
+</div>
+<app-tasklist></app-tasklist>
+            

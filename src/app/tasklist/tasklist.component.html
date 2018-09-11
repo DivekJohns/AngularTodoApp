@@ -1,0 +1,108 @@
+<div  [style.display]="editSignal" class=" w3-animate-bottom w3-animate-opacity ">
+
+<div  class=" w3-mobile w3-card  w3-padding w3-bar" style="width: 96%;">
+<form class="w3-bar-item">
+<input #inputdata [value]="editdata" class="w3-input w3-round w3-animate-input" type="text" style="width:45%"  placeholder="Edit Task..." >
+</form>
+
+ <div class="w3-dropdown-hover w3-bar-item">
+    <button class="w3-button w3-text-teal " >{{Category}}  <i class="fa fa-angle-down"></i></button>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4">
+      <a href="#" (click)="changeCategory('Personal')" class="w3-bar-item w3-button">Personal</a>
+      <a href="#" (click)="changeCategory('Work')" class="w3-bar-item w3-button">Work</a>
+      <a href="#" (click)="changeCategory('Hobbies')"  class="w3-bar-item w3-button">Hobbies</a>
+      <a href="#" (click)="changeCategory('Vacation')"  class="w3-bar-item w3-button">Vacation</a>
+      <a href="#" (click)="changeCategory('Birthday')" class="w3-bar-item w3-button">Birthday</a>
+      <a href="#" (click)="changeCategory('Hobbies')" class="w3-bar-item w3-button">Hobbies</a>
+    </div>
+    </div>
+
+     <div class="w3-dropdown-hover w3-bar-item">
+    <button class="w3-button w3-text-teal ">{{Prority}} <i class="fa fa-angle-down"></i></button>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4 ">
+      <a href="#" (click)="changePrority('High')" class="w3-bar-item w3-button">High</a>
+      <a href="#" (click)="changePrority('Medium')"  class="w3-bar-item w3-button">Medium</a>
+      <a href="#" (click)="changePrority('Low ')" class="w3-bar-item w3-button">Low</a>
+    </div>
+
+    </div>
+       <div class="w3-bar-item">
+        <button  (click)="newdata(inputdata.value)"  class="  w3-round w3-button w3-teal">Update</button>
+        &nbsp;
+           &nbsp;
+
+        <button  class="w3-button w3-red w3-round" (click)="hideeditpanel()"> <i class="fa fa fa-close"></i></button> 
+
+      </div>
+
+
+</div>
+</div>
+
+<div class="w3-container w3-teal w3-card-4 w3-mobile  ">
+ <label class="w3-text-teal"><b>Search</b></label>
+  <input placeholder="Search  Task Name , Category , Prority" class= " w3-round w3-input w3-border w3-light-grey " type="text"  [(ngModel)]="searchText">
+</div>
+ 
+<div class="w3-mobile  w3-container w3-animate-bottom ">
+<table class="w3-table-all w3-card-4  w3-mobile ">
+    <tr class="w3-teal w3-animate-zoom">
+         <th>Status</th>
+      <th>Task Name</th>
+      <th>
+         <div class="w3-dropdown-hover w3-bar-item">
+    <div style="width:75px;" class=" w3-teal " >Category <i class="fa fa-angle-down"></i></div>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4">
+     <a  (click)="filterMe('')" class="w3-bar-item w3-button">All</a>
+      <a  (click)="filterMe('Personal')" class="w3-bar-item w3-button">Personal</a>
+      <a (click)="filterMe('Work')" class="w3-bar-item w3-button">Work</a>
+      <a (click)="filterMe('Hobbies')"  class="w3-bar-item w3-button">Hobbies</a>
+      <a  (click)="filterMe('Vacation')"  class="w3-bar-item w3-button">Vacation</a>
+      <a  (click)="filterMe('Birthday')" class="w3-bar-item w3-button">Birthday</a>
+      <a  (click)="filterMe('Hobbies')" class="w3-bar-item w3-button">Hobbies</a>
+    </div>
+    </div>
+ </th>
+      <th> 
+     <div class="w3-dropdown-hover w3-bar-item">
+    <div class=" w3-teal ">Prority <i class="fa fa-angle-down"></i></div>
+    <div class=" w3-dropdown-content w3-bar-block w3-card-4 ">
+           <a  (click)="filterMe('')" class="w3-bar-item w3-button">All</a>
+      <a href="#" (click)="filterMe('High')" class="w3-bar-item w3-button">High</a>
+      <a href="#" (click)="filterMe('Medium')"  class="w3-bar-item w3-button">Medium</a>
+      <a href="#" (click)="filterMe('Low ')" class="w3-bar-item w3-button">Low</a>
+    </div>
+
+    </div>
+  </th>
+      <th>  
+    <div class=" w3-teal ">    <input (click)="hideCompelted();" [(ngModel)]="showChecked"  class="w3-check" type="checkbox">
+      <label>Hide completed</label> </div>
+
+
+    </th>
+    </tr>
+
+    <tr  *ngFor="let item of (items | search: searchText) | complete : showChecked " class="w3-animate-opacity {{ item.status }} " >
+    <td><input (click)="taskCompleted($event , item.id, item.checked )" class=" w3-margin w3-check" type="checkbox" checked="{{item.checked}}" disabled="{{item.disabled}}" ></td>
+
+      <td> {{ item.taskname  }}  </td>
+      <td> {{ item.category}}</td>
+      <td> {{ item.prority}}</td>
+      <td> <button class="w3-button w3-red -" (click)="firebaseDeleteCourse(item)"> &#10006; </button> 
+        &nbsp;
+           &nbsp;
+        <button disabled="{{item.disabled}}"  class="w3-button w3-grey -" (click)="firebaseUpdateCourse(item)"> <i class="fa fa fa-edit"></i></button> 
+       
+      </td>
+    </tr>
+  </table>
+ <div [style.display]="display">
+   <div class="loader "></div>
+
+ </div>
+<div style="margin-left: 45%;" [style.display]="emptyflag" ></div>
+   <p class="w3-text-grey"> {{loadingmessage}}  </p>
+</div>
+
+
